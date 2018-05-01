@@ -1,13 +1,18 @@
 package model.maze;
 
+import model.maze.SubCell;
+
 import java.util.ArrayList;
 
 public class Cell {
 
+    /* A cell has four neighbours. */
+    public final static int NUM_NEIGHBOURS = 4;
+
     /* Each cell must know its position in the grid. */
     private int row, column;
 
-    /* Each cell is divided into four sub-cells. */
+    /* Each cell is divided into four subcells. */
     private SubCell northWesternSubCell;
     private SubCell northEasternSubCell;
     private SubCell southWesternSubCell;
@@ -156,7 +161,7 @@ public class Cell {
     }
 
     /**
-     * Getter for the north-western sub-cell.
+     * Getter for the north western sub-cell.
      * @return SubCell
      */
     public SubCell getNorthWesternSubCell() {
@@ -164,7 +169,7 @@ public class Cell {
     }
 
     /**
-     * Getter for the north-eastern sub-cell.
+     * Getter for the north eastern sub-cell.
      * @return SubCell
      */
     public SubCell getNorthEasternSubCell() {
@@ -172,7 +177,7 @@ public class Cell {
     }
 
     /**
-     * Getter for the south-western sub-cell.
+     * Getter for the south western sub-cell.
      * @return SubCell
      */
     public SubCell getSouthWesternSubCell() {
@@ -180,10 +185,23 @@ public class Cell {
     }
 
     /**
-     * Getter for the south-eastern sub-cell.
+     * Getter for the south eastern sub-cell.
      * @return SubCell
      */
     public SubCell getSouthEasternSubCell() {
         return southEasternSubCell;
+    }
+
+    public ArrayList<Cell> getUnvisitedNeighbours() {
+
+        ArrayList<Cell> unvisitedNeighbours = new ArrayList<>();
+
+        /* We need to get each neighbouring cell and check whether it is linked with this cell or not. */
+        if (this.north != null && !this.links.contains(this.north)) unvisitedNeighbours.add(this.north);
+        if (this.east != null && !this.links.contains(this.east)) unvisitedNeighbours.add(this.east);
+        if (this.south != null && !this.links.contains(this.south)) unvisitedNeighbours.add(this.south);
+        if (this.west != null && !this.links.contains(this.west)) unvisitedNeighbours.add(this.west);
+
+        return unvisitedNeighbours;
     }
 }

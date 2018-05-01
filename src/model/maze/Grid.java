@@ -1,5 +1,7 @@
 package model.maze;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Grid class is essentially a container for Cells.
  */
@@ -162,5 +164,15 @@ public class Grid {
             System.out.println(lowerSubCells);
         }
 
+    }
+
+    /**
+     * Returns a random Cell from the grid.
+     * @return Cell
+     */
+    public Cell getRandomCell () {
+        int randomRow = ThreadLocalRandom.current().nextInt(0, this.rows);
+        int randomColumn = ThreadLocalRandom.current().nextInt(0, this.columns);
+        return this.skeleton[randomColumn][randomColumn];
     }
 }
