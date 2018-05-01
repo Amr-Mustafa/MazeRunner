@@ -9,3 +9,4 @@ Final Project.
 5. [Git Commands list.](https://gist.github.com/ahmedhamdy90/c7dcf012bbd16b4371e8)
 6. [Maze Generation Algorithms.](http://www.jamisbuck.org/presentations/rubyconf2011/index.html)
 7. [Mazes for Programmers.](https://drive.google.com/file/d/1KbnEK-C88Jfz14gZRUTvPBu66o24CgcO/view?usp=sharing)
+8. [Mazes with Blockwise Geometry.](http://weblog.jamisbuck.org/2015/10/31/mazes-blockwise-geometry.html)
