@@ -1,5 +1,11 @@
-# MazeRunnerCC272
-Final Project.
+# MazeRunner
+CC272 - Final Project.
+
+# Team Members
+1. Amr Mustafa.
+2. Abdelrahman Yehya.
+3. Nour Shobier.
+4. Nour Yousry.
 
 # Resources
 1. [Maze Runner PDF.](https://drive.google.com/file/d/1REpSaubOmQWFzednKw_NGly35cyWlPnj/view?usp=sharing)
@@ -9,3 +15,4 @@ Final Project.
 5. [Git Commands list.](https://gist.github.com/ahmedhamdy90/c7dcf012bbd16b4371e8)
 6. [Maze Generation Algorithms.](http://www.jamisbuck.org/presentations/rubyconf2011/index.html)
 7. [Mazes for Programmers.](https://drive.google.com/file/d/1KbnEK-C88Jfz14gZRUTvPBu66o24CgcO/view?usp=sharing)
+8. [Mazes with Blockwise Geometry.](http://weblog.jamisbuck.org/2015/10/31/mazes-blockwise-geometry.html)
