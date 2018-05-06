@@ -139,14 +139,14 @@ public class Grid {
     public void drawMaze() {
 
         /* The northern boundary of the maze is explicitly drawn. */
-        System.out.println(new String(new char[2 * this.columns + 1]).replace("\0", "#"));
+        System.out.println(new String(new char[2 * this.columns + 1]).replace("\0", "b"));
 
         /* For each row. */
         for (int row = 0; row < rows; row++) {
 
             /* The western boundary of the maze is explicitly drawn. */
-            String upperSubCells = "#",
-                    lowerSubCells = "#";
+            String upperSubCells = "b",
+                    lowerSubCells = "b";
 
             /* For each column. */
             for (int column = 0; column < columns; column++) {
@@ -174,5 +174,46 @@ public class Grid {
         int randomRow = ThreadLocalRandom.current().nextInt(0, this.rows);
         int randomColumn = ThreadLocalRandom.current().nextInt(0, this.columns);
         return this.skeleton[randomColumn][randomColumn];
+    }
+
+    public char[][] toCharMatrix () {
+
+        char[][] matrix = new char[2 * this.rows + 1][2 * this.columns + 1];
+
+        /* The northern boundary of the maze is explicitly drawn. */
+        String maze = new String(new char[2 * this.columns + 1]).replace("\0", "b");
+
+        /* For each row. */
+        for (int row = 0; row < rows; row++) {
+
+            /* The western boundary of the maze is explicitly drawn. */
+            String upperSubCells = "b",
+                    lowerSubCells = "b";
+
+            /* For each column. */
+            for (int column = 0; column < columns; column++) {
+
+                /* Get the current cell. */
+                Cell cell = this.skeleton[row][column];
+
+                /* Add the upper and lower sub-cells of the current cell. */
+                upperSubCells += cell.getNorthWesternSubCell().getContent() + cell.getNorthEasternSubCell().getContent();
+                lowerSubCells += cell.getSouthWesternSubCell().getContent() + cell.getSouthEasternSubCell().getContent();
+
+            }
+
+            maze += upperSubCells;
+            maze += lowerSubCells;
+
+        }
+
+        int stringCols = 0;
+        for (int row = 0; row < 2 * this.rows + 1; row++) {
+            for (int column = 0; column < 2 * this.columns + 1; column++) {
+                matrix[row][column] = maze.toCharArray()[stringCols++];
+            }
+        }
+
+        return matrix;
     }
 }

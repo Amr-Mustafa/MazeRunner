@@ -1,7 +1,5 @@
 package model.maze;
 
-import model.maze.SubCell;
-
 import java.util.ArrayList;
 
 public class Cell {
@@ -141,22 +139,22 @@ public class Cell {
     public void configureSubCells () {
 
         /* The northWesternSubCell is always a passage. */
-        this.northWesternSubCell = new SubCell(" ");
+        this.northWesternSubCell = new SubCell("g");
 
         /* The southEasternSubCell is always a passage. */
-        this.southEasternSubCell = new SubCell("#");
+        this.southEasternSubCell = new SubCell("b");
 
         /* If the cell is linked to its southern neighbour, then make the southWesternSubCell a
            passage, otherwise make it a wall. */
         if (this.areLinked(this.south)) {
-            this.southWesternSubCell = new SubCell(" ");
-        } else this.southWesternSubCell = new SubCell("#");
+            this.southWesternSubCell = new SubCell("g");
+        } else this.southWesternSubCell = new SubCell("b");
 
         /* If the cell is linked to its eastern neighbour, then make the northEasternSubCell a
            passage, otherwise make it a wall. */
         if (this.areLinked(this.east)) {
-            this.northEasternSubCell = new SubCell(" ");
-        } else this.northEasternSubCell = new SubCell("#");
+            this.northEasternSubCell = new SubCell("g");
+        } else this.northEasternSubCell = new SubCell("b");
 
     }
 
