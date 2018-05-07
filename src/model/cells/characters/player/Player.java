@@ -1,7 +1,9 @@
 package model.cells.characters.player;
 
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import model.cells.characters.Cell;
 import model.cells.characters.Character;
 import model.infopanel.Observable;
 
@@ -11,6 +13,26 @@ public class Player extends Character implements Observable {
     private int tileX=1,tileY=1;
 
     private static final Player playerInstance = new Player();
+
+    public void move(Cell source, Cell destination, Object matrix)
+    {
+
+    }
+
+    public void hitBomb(Cell source, Cell destination, Object matrix)
+    {
+
+    }
+
+    public void hitWall(Cell source, Cell destination, Object matrix)
+    {
+
+    }
+
+    public void hitRoad(Cell source, Cell destination, Object matrix)
+    {
+
+    }
 
     public int getTileX(){
         return tileX;

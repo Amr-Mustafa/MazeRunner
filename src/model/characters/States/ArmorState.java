@@ -4,6 +4,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import model.cells.characters.Cell;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +34,7 @@ public class ArmorState implements PlayerState
     /*-----------------------------------------------------------------------------------------*/
 
     @Override
-    public void hitBomb(Point2D source, Point2D destination, Object bomb, Object matrix)
+    public void hitBomb(Cell source, Cell destination, Object bomb, Object matrix)
     {
 
     }

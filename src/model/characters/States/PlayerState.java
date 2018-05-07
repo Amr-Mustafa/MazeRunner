@@ -3,12 +3,13 @@ package model.characters.States;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import model.cells.characters.Cell;
 
 import java.util.Map;
 
 public interface PlayerState
 {
-    void hitBomb(Point2D source, Point2D destination, Object bomb, Object matrix);
+    void hitBomb(Cell source, Cell destination, Object bomb, Object matrix);
 
     void setImage(Image image);
 
