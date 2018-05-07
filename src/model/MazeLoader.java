@@ -29,6 +29,9 @@ public class MazeLoader {
         this.mazeMatrix[3][3] = 'a';
         this.mazeMatrix[15][15] = 'd';
         this.mazeMatrix[12][7] = 'd';
+        this.mazeMatrix[18][4] = 'f';
+        this.mazeMatrix[1][6] = 'c';//arrows
+        this.mazeMatrix[1][5] = 'e';//bows
     }
 
     public void setCanvas(Canvas canvas) {
@@ -58,6 +61,15 @@ public class MazeLoader {
                 }
                 if(mazeMatrix[i][j] == 'd') {
                     cell.drawImage(new Image("view/bomb.PNG"), i * 32, j * 32);
+                }
+                if(mazeMatrix[i][j] == 'f') {
+                    cell.drawImage(new Image("view/FreezeBomb.PNG"), i * 32, j * 32);
+                }
+                if(mazeMatrix[i][j] == 'c') {
+                    cell.drawImage(new Image("view/Arrows.PNG"), i * 32, j * 32);
+                }
+                if(mazeMatrix[i][j] == 'e') {
+                    cell.drawImage(new Image("view/Bow.PNG"), i * 32, j * 32);
                 }
             }
 

@@ -11,40 +11,69 @@ public class Player extends Character {
 
     private static final Player playerInstance = new Player();
 
-    public int getTileX(){
-        return tileX;
-    }
+    public int getTileX(){ return tileX; }
 
-    public int getTileY(){
-        return tileY;
-    }
+    public int getTileY(){ return tileY; }
 
 
-    public void PlayerPhase(int checkState , char direction){
+    public void PlayerPhase(int checkState ,int freezeState, char direction){
         if(checkState == 0)
         {
-            if(direction == 'L')
+            if(freezeState == 0 )
             {
-                characterPath = "view/LeftNormalHero.PNG";
-                sprite = new Image(characterPath);
+                if(direction == 'L')
+                {
+                    characterPath = "view/LeftNormalHero.PNG";
+                    sprite = new Image(characterPath);
+                }
+                else if(direction == 'R')
+                {
+                    characterPath = "view/NormalHero.PNG";
+                    sprite = new Image(characterPath);
+                }
             }
-            else if(direction == 'R')
+            else if(freezeState == 1 )
             {
-                characterPath = "view/NormalHero.PNG";
-                sprite = new Image(characterPath);
+                if(direction == 'L')
+                {
+                    characterPath = "view/LeftFreezedNormalHero.PNG";
+                    sprite = new Image(characterPath);
+                }
+                else if(direction == 'R')
+                {
+                    characterPath = "view/FreezedNormalHero.PNG";
+                    sprite = new Image(characterPath);
+                }
             }
+
         }
         else if(checkState == 1)
         {
-            if(direction == 'L')
+            if(freezeState == 0)
             {
-                characterPath = "view/LeftArmoredHero.PNG";
-                sprite = new Image(characterPath);
+                if(direction == 'L')
+                {
+                    characterPath = "view/LeftArmoredHero.PNG";
+                    sprite = new Image(characterPath);
+                }
+                else if(direction == 'R')
+                {
+                    characterPath = "view/ArmoredHero.PNG";
+                    sprite = new Image(characterPath);
+                }
             }
-            else if(direction == 'R')
+            else if(freezeState == 1 )
             {
-                characterPath = "view/ArmoredHero.PNG";
-                sprite = new Image(characterPath);
+                if(direction == 'L')
+                {
+                    characterPath = "view/LeftFreezedArmoredHero.PNG";
+                    sprite = new Image(characterPath);
+                }
+                else if(direction == 'R')
+                {
+                    characterPath = "view/FreezedArmoredHero.PNG";
+                    sprite = new Image(characterPath);
+                }
             }
         }
         else if(checkState == 2)
