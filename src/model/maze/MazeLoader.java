@@ -1,12 +1,11 @@
-package model;
+package model.maze;
 
-import controller.GameScene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import model.characters.Player;
-import model.maze.BinaryTreeMaze;
-import model.maze.Grid;
+import model.cells.characters.player.Player;
+import model.maze.generator.BinaryTreeMaze;
+import model.maze.generator.Grid;
 
 public class MazeLoader {
 
@@ -26,6 +25,9 @@ public class MazeLoader {
         this.maze = binaryTreeMaze.generateMaze(10, 10);
         this.mazeMatrix = maze.toCharMatrix();
         this.mazeMatrix[1][1] = 'p';
+        this.mazeMatrix[3][3] = 'a';
+        this.mazeMatrix[15][15] = 'd';
+        this.mazeMatrix[12][7] = 'd';
     }
 
     public void setCanvas(Canvas canvas) {
@@ -50,9 +52,23 @@ public class MazeLoader {
                 if(mazeMatrix[i][j] == 'p') {
                     Player.getPlayer().draw(cell, i, j);
                 }
-
+                if(mazeMatrix[i][j] == 'a') {
+                    cell.drawImage(new Image("view/ArmorSet.PNG"), i * 32, j * 32);
+                }
+                if(mazeMatrix[i][j] == 'd') {
+                    cell.drawImage(new Image("view/bomb.PNG"), i * 32, j * 32);
+                }
             }
+
         }
+    }
+
+    public void moveInMaze(int playerX ,int playerY){
+
+        GraphicsContext cell = canvas.getGraphicsContext2D();
+        cell.drawImage(new Image("view/road.fw.PNG"),  32,  32);
+        Player.getPlayer().draw(cell,playerX,playerY);
+
     }
 
 }

@@ -1,4 +1,4 @@
-package model.maze;
+package model.maze.generator;
 
 import java.util.ArrayList;
 import java.util.Stack;

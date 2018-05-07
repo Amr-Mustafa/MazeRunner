@@ -4,8 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.maze.BinaryTreeMaze;
-import model.maze.Grid;
 
 public class Main extends Application {
 

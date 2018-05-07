@@ -1,7 +1,4 @@
-package model.maze;
-
-import model.maze.SuperCell;
-import model.maze.Grid;
+package model.maze.generator;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;

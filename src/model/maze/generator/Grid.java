@@ -1,6 +1,7 @@
-package model.maze;
+package model.maze.generator;
 
 import java.util.concurrent.ThreadLocalRandom;
+import model.cells.characters.Cell;
 
 /**
  * Grid class is essentially a container for Cells.
@@ -178,7 +179,7 @@ public class Grid {
 
     /**
      *
-     * @returns a 2D matrix of characters
+     * @returns a 2D matrix of characters to be drawn.
      */
     public char[][] toCharMatrix () {
 
@@ -221,5 +222,20 @@ public class Grid {
         return matrix;
     }
 
+    public Cell[][] toCellMatrix (char[][] charMatrix) {
 
+        /* A 2D matrix of Cells. */
+        Cell[][] cellMatrix = new Cell[2 * this.rows + 1][2 * this.columns + 1];
+
+        /* We want to convert the matrix of chars to a matrix of Cells. */
+        for (int row = 0; row < 2 * this.rows + 1; row++) {
+            for (int column = 0; column < 2 * this.columns + 1; column++) {
+//                if (charMatrix[row][column] == 'a')
+//                    cellMatrix[row][column] = new Wall();
+//                else if (charMatrix[row][column] == '')
+            }
+        }
+
+        return cellMatrix;
+    }
 }
