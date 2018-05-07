@@ -43,8 +43,11 @@ public class GameScene {
         mazeLoader = MazeLoader.getMazeLoader();
 
                 if(keyEvent.getCode()==KeyCode.W){
+                    //player.action();
+
                     if(freezed!=0)
                     {
+
                         freezed--;
                     }
                     else if(mazeLoader.mazeMatrix[player.getTileX()][player.getTileY()-1] != 'b') {

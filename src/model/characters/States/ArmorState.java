@@ -34,7 +34,7 @@ public class ArmorState implements PlayerState
     /*-----------------------------------------------------------------------------------------*/
 
     @Override
-    public void hitBomb(Cell source, Cell destination, Object bomb, Object matrix)
+    public void hitBomb(Cell source, Cell destination, Object bomb)
     {
 
     }

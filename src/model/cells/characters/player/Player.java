@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import model.cells.characters.Cell;
 import model.cells.characters.Character;
+import model.cells.walls.Wall;
 import model.infopanel.Observable;
 
 public class Player extends Character implements Observable {
@@ -14,22 +15,32 @@ public class Player extends Character implements Observable {
 
     private static final Player playerInstance = new Player();
 
-    public void move(Cell source, Cell destination, Object matrix)
+    public void action(Cell source, Cell destination)
+    {
+        if(destination instanceof Road) move(source,destination);
+        if(destination instanceof Bomb) hitBomb(source,destination);
+        if(destination instanceof Road) hitRoad(source,destination);
+        if(destination instanceof Wall) hitWall(source,destination);
+    }
+
+    public void move(Cell source, Cell destination)
+    {
+        Cell temp = source;
+        source = destination;
+        destination = temp;
+    }
+
+    public void hitBomb(Cell source, Cell destination)
+    {
+        //change player image + reduce life
+    }
+
+    public void hitWall(Cell source, Cell destination )
     {
 
     }
 
-    public void hitBomb(Cell source, Cell destination, Object matrix)
-    {
-
-    }
-
-    public void hitWall(Cell source, Cell destination, Object matrix)
-    {
-
-    }
-
-    public void hitRoad(Cell source, Cell destination, Object matrix)
+    public void hitRoad(Cell source, Cell destination )
     {
 
     }

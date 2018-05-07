@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface PlayerState
 {
-    void hitBomb(Cell source, Cell destination, Object bomb, Object matrix);
+    void hitBomb(Cell source, Cell destination, Object bomb);
 
     void setImage(Image image);
 
