@@ -1,4 +1,4 @@
-package model.maze;
+package model.maze.generator;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -18,45 +18,45 @@ public class RecursiveBacktrackerMaze {
 
         maze = new Grid(rows, columns);
 
-        /* Choose a random starting cell. */
-        Cell startingCell = maze.getRandomCell();
+        /* Choose a random starting SuperCell. */
+        SuperCell startingCell = maze.getRandomCell();
 
         /* Initialize a Stack to keep track of visited cells. */
-        Stack<Cell> stack = new Stack<>();
+        Stack<SuperCell> stack = new Stack<>();
         stack.push(startingCell);
 
         /* Once the stack becomes empty, the algorithm finishes. */
         while (!stack.isEmpty()) {
 
-            /* The current cell is always at the top of the stack. */
-            Cell currentCell = stack.peek();
+            /* The current SuperCell is always at the top of the stack. */
+            SuperCell currentCell = stack.peek();
 
-            /* Get a list of unvisited neighbours of the current cell. */
-            ArrayList<Cell> unvisitedNeighbours = currentCell.getUnvisitedNeighbours();
+            /* Get a list of unvisited neighbours of the current SuperCell. */
+            ArrayList<SuperCell> unvisitedNeighbours = currentCell.getUnvisitedNeighbours();
 
-            /* If we are at a dead end - the current cell has no unvisited neighbours - we backtrack. */
+            /* If we are at a dead end - the current SuperCell has no unvisited neighbours - we backtrack. */
             if (unvisitedNeighbours.isEmpty())
                 stack.pop();
 
                 /* Else if there is at least one unvisited neighbour we randomly choose one. */
             else {
                 int randomIndex = ThreadLocalRandom.current().nextInt(0, unvisitedNeighbours.size());
-                Cell neighbourToLink = unvisitedNeighbours.get(randomIndex);
+                SuperCell neighbourToLink = unvisitedNeighbours.get(randomIndex);
 
                 if (neighbourToLink != null) {
                     currentCell.link(neighbourToLink, true);
 
-                    /* Make the new cell the current cell. */
+                    /* Make the new SuperCell the current SuperCell. */
                     stack.push(neighbourToLink);
                 }
             }
 
         }
 
-        /* After generating the maze, configure the sub-cells of each cell in it. */
+        /* After generating the maze, configure the sub-cells of each SuperCell in it. */
         for (int row = 0; row < rows; row++) {
             for (int column = 0; column < columns; column++) {
-                Cell currentCell = this.maze.getCell(row, column);
+                SuperCell currentCell = this.maze.getCell(row, column);
                 currentCell.configureSubCells();
             }
         }

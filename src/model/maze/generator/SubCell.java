@@ -1,4 +1,4 @@
-package model.maze;
+package model.maze.generator;
 
 public class SubCell {
 

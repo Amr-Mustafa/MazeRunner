@@ -2,13 +2,10 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import model.MazeLoader;
-import model.characters.Player;
+import model.maze.MazeLoader;
+import model.cells.characters.player.Player;
 
 public class GameScene {
 

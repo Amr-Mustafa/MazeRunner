@@ -1,12 +1,11 @@
-package model;
+package model.maze;
 
-import controller.GameScene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import model.characters.Player;
-import model.maze.BinaryTreeMaze;
-import model.maze.Grid;
+import model.cells.characters.player.Player;
+import model.maze.generator.BinaryTreeMaze;
+import model.maze.generator.Grid;
 
 public class MazeLoader {
 

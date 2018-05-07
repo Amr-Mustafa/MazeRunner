@@ -1,10 +1,11 @@
-package model.characters;
+package model.cells.characters.player;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import model.MazeLoader;
+import model.cells.characters.Character;
+import model.infopanel.Observable;
 
-public class Player extends Character {
+public class Player extends Character implements Observable {
 
     //Change with player position
     private int tileX=1,tileY=1;
