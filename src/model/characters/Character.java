@@ -9,7 +9,7 @@ public abstract class Character {
     String characterPath;
     Image sprite;
 
-    abstract void move();
+    abstract void move(int x,int y);
     abstract void draw(GraphicsContext cell, int x, int y);
 
 }
