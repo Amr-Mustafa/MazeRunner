@@ -1,6 +1,7 @@
-package model.maze;
+package model.maze.generator;
 
 import java.util.concurrent.ThreadLocalRandom;
+import model.cells.characters.Cell;
 
 /**
  * Grid class is essentially a container for Cells.
@@ -12,7 +13,7 @@ public class Grid {
     private int rows, columns;
 
     /* The backend of the Grid is a 2D matrix of Cells. */
-    private Cell[][] skeleton;
+    private SuperCell[][] skeleton;
 
     public Grid (int rows, int columns) {
         this.rows = rows;
@@ -25,21 +26,21 @@ public class Grid {
      * Fills the skeleton of the grid with Cells.
      */
     private void initializeSkeleton () {
-        this.skeleton = new Cell[this.rows][this.columns];
+        this.skeleton = new SuperCell[this.rows][this.columns];
 
         for (int row = 0; row < this.rows; row++)
             for (int column = 0; column < this.columns; column++)
-                this.skeleton[row][column] = new Cell(row, column);
+                this.skeleton[row][column] = new SuperCell(row, column);
     }
 
     /**
-     * Sets the neighbours of each Cell in the grid.
+     * Sets the neighbours of each SuperCell in the grid.
      */
     private void configureCells () {
         for (int row = 0; row < this.rows; row++)
             for (int column = 0; column < this.columns; column++) {
 
-                Cell currentCell = this.skeleton[row][column];
+                SuperCell currentCell = this.skeleton[row][column];
 
                 if (row > 0) currentCell.setNorth(this.skeleton[row - 1][column]);
                 else currentCell.setNorth(null);
@@ -56,12 +57,12 @@ public class Grid {
     }
 
     /**
-     * Returns the Cell specified by the passed parameters if valid otherwise null.
+     * Returns the SuperCell specified by the passed parameters if valid otherwise null.
      * @param row
      * @param column
-     * @return Cell
+     * @return SuperCell
      */
-    public Cell getCell (int row, int column) {
+    public SuperCell getCell (int row, int column) {
         if (row < 0 || row > this.rows || column < 0 || column > this.columns) return null;
         return this.skeleton[row][column];
     }
@@ -90,23 +91,23 @@ public class Grid {
             /* For each column. */
             for (int column = 0; column < this.columns; column++) {
 
-                /* Get the current cell. */
-                Cell cell = this.skeleton[row][column];
+                /* Get the current SuperCell. */
+                SuperCell SuperCell = this.skeleton[row][column];
 
-                /* Create a dummy cell just in case. */
-                if (cell == null) cell = new Cell(-1, -1);
+                /* Create a dummy SuperCell just in case. */
+                if (SuperCell == null) SuperCell = new SuperCell(-1, -1);
 
-                /* Get the body of the current cell. */
+                /* Get the body of the current SuperCell. */
                 String body = "   ";
 
-                /* Get the eastern wall of the current cell. */
-                String easternWall = cell.areLinked(cell.getEast()) ? " " : "|";
+                /* Get the eastern wall of the current SuperCell. */
+                String easternWall = SuperCell.areLinked(SuperCell.getEast()) ? " " : "|";
 
                 /* Add the body and the eastern wall to the running string top. */
                 top = top + body + easternWall;
 
-                /* Get the southern wall of the current cell. */
-                String southWall = cell.areLinked(cell.getSouth()) ? "   " : "---";
+                /* Get the southern wall of the current SuperCell. */
+                String southWall = SuperCell.areLinked(SuperCell.getSouth()) ? "   " : "---";
 
                 /* Add the southern wall and a corner to the running string bottom. */
                 bottom = bottom + southWall + "+";
@@ -151,12 +152,12 @@ public class Grid {
             /* For each column. */
             for (int column = 0; column < columns; column++) {
 
-                /* Get the current cell. */
-                Cell cell = this.skeleton[row][column];
+                /* Get the current SuperCell. */
+                SuperCell SuperCell = this.skeleton[row][column];
 
-                /* Add the upper and lower sub-cells of the current cell. */
-                upperSubCells += cell.getNorthWesternSubCell().getContent() + cell.getNorthEasternSubCell().getContent();
-                lowerSubCells += cell.getSouthWesternSubCell().getContent() + cell.getSouthEasternSubCell().getContent();
+                /* Add the upper and lower sub-cells of the current SuperCell. */
+                upperSubCells += SuperCell.getNorthWesternSubCell().getContent() + SuperCell.getNorthEasternSubCell().getContent();
+                lowerSubCells += SuperCell.getSouthWesternSubCell().getContent() + SuperCell.getSouthEasternSubCell().getContent();
 
             }
 
@@ -167,15 +168,19 @@ public class Grid {
     }
 
     /**
-     * Returns a random Cell from the grid.
-     * @return Cell
+     * Returns a random SuperCell from the grid.
+     * @return SuperCell
      */
-    public Cell getRandomCell () {
+    public SuperCell getRandomCell () {
         int randomRow = ThreadLocalRandom.current().nextInt(0, this.rows);
         int randomColumn = ThreadLocalRandom.current().nextInt(0, this.columns);
         return this.skeleton[randomColumn][randomColumn];
     }
 
+    /**
+     *
+     * @returns a 2D matrix of characters to be drawn.
+     */
     public char[][] toCharMatrix () {
 
         char[][] matrix = new char[2 * this.rows + 1][2 * this.columns + 1];
@@ -193,12 +198,12 @@ public class Grid {
             /* For each column. */
             for (int column = 0; column < columns; column++) {
 
-                /* Get the current cell. */
-                Cell cell = this.skeleton[row][column];
+                /* Get the current SuperCell. */
+                SuperCell SuperCell = this.skeleton[row][column];
 
-                /* Add the upper and lower sub-cells of the current cell. */
-                upperSubCells += cell.getNorthWesternSubCell().getContent() + cell.getNorthEasternSubCell().getContent();
-                lowerSubCells += cell.getSouthWesternSubCell().getContent() + cell.getSouthEasternSubCell().getContent();
+                /* Add the upper and lower sub-cells of the current SuperCell. */
+                upperSubCells += SuperCell.getNorthWesternSubCell().getContent() + SuperCell.getNorthEasternSubCell().getContent();
+                lowerSubCells += SuperCell.getSouthWesternSubCell().getContent() + SuperCell.getSouthEasternSubCell().getContent();
 
             }
 
@@ -215,5 +220,22 @@ public class Grid {
         }
 
         return matrix;
+    }
+
+    public Cell[][] toCellMatrix (char[][] charMatrix) {
+
+        /* A 2D matrix of Cells. */
+        Cell[][] cellMatrix = new Cell[2 * this.rows + 1][2 * this.columns + 1];
+
+        /* We want to convert the matrix of chars to a matrix of Cells. */
+        for (int row = 0; row < 2 * this.rows + 1; row++) {
+            for (int column = 0; column < 2 * this.columns + 1; column++) {
+//                if (charMatrix[row][column] == 'a')
+//                    cellMatrix[row][column] = new Wall();
+//                else if (charMatrix[row][column] == '')
+            }
+        }
+
+        return cellMatrix;
     }
 }
