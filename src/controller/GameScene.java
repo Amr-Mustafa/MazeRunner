@@ -54,6 +54,21 @@ public class GameScene {
                 clickedButton = 'w';
             }
         }
+                if(keyEvent.getCode()==KeyCode.W){
+                    //player.action();
+
+                    if(freezed!=0)
+                    {
+
+                        freezed--;
+                    }
+                    else if(mazeLoader.mazeMatrix[player.getTileX()][player.getTileY()-1] != 'b') {
+                        mazeLoader.mazeMatrix[player.getTileX()][player.getTileY()] = 'g';
+                        player.move(0, -1);
+                        clickedButton = 'w';
+                    }
+                }
+
 
                 if(keyEvent.getCode()==KeyCode.S){
                     if(freezed!=0)

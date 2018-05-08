@@ -1,5 +1,5 @@
-package model.characters.States;
-
-public class NoArmorState
-{
-}
+//package model.characters.States;
+//
+//public class NoArmorState
+//{
+//}

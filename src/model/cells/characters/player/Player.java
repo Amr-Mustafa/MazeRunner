@@ -4,6 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import model.cells.CellState;
 import model.cells.characters.player.states.UnarmoredState;
 import model.cells.gifts.HealthGift;
+import model.cells.walls.Wall;
 import model.infopanel.InfoPanel;
 
 import java.util.Observable;
@@ -20,7 +21,7 @@ public class Player extends Observable implements IPlayer {
     /* The user can set a player name at the start of the game. */
     private String name;
 
-    private int tileX=1,tileY=1; // ------------------------------------------------------------------>
+    private int tileX=1,tileY=1;
 
     /* Reference to the singleton object. */
     private static final Player playerInstance = new Player ();

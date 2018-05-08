@@ -225,9 +225,9 @@ public class Grid {
         }
 
         /* Randomize gifts and bombs. */
-        bombs = 4;
+        int bombs = 4;
         while (bombs != 0) {
-
+            bombs--;
         }
 
 
