@@ -1,16 +1,18 @@
-package model.cells.walls;
+package model.cells.walls.states;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import model.cells.CellState;
 
-public class StoneWall extends Wall {
+public class GrassWallState implements CellState {
+
 
     /* The wallPath is the location of the wall's image on drive. */
     private String wallPath;
     private Image sprite;
 
-    public StoneWall() {
-        this.wallPath = "view/block1.png";
+    public GrassWallState() {
+        this.wallPath = "view/grassWall.fw.png";
         this.sprite = new Image(wallPath);
     }
 
@@ -21,7 +23,6 @@ public class StoneWall extends Wall {
 
     @Override
     public void receivePlayer() {
-        System.out.println("You can't go through stone!");
+        System.out.println("You have to cut the grass first!");
     }
-
 }

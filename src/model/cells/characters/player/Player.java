@@ -2,17 +2,19 @@ package model.cells.characters.player;
 
 import javafx.scene.canvas.GraphicsContext;
 import model.cells.CellState;
+import model.cells.characters.player.states.PlayerState;
 import model.cells.characters.player.states.UnarmoredState;
 import model.cells.gifts.HealthGift;
 import model.cells.walls.Wall;
 import model.infopanel.InfoPanel;
+import model.maze.Maze;
 
 import java.util.Observable;
 
 public class Player extends Observable implements IPlayer {
 
     /* The state of the player is either alive-armored, alive-unarmored, dead. */
-    private CellState playerState;
+    private PlayerState playerState;
 
     /* Player score and health are increased/decreased based on game play. */
     private int score;
@@ -21,7 +23,8 @@ public class Player extends Observable implements IPlayer {
     /* The user can set a player name at the start of the game. */
     private String name;
 
-    private int tileX=1,tileY=1;
+    /* The player objects "knows" its position in the maze all the times. */
+    private int currentRow = 1, currentColumn = 1;
 
     /* Reference to the singleton object. */
     private static final Player playerInstance = new Player ();
@@ -47,24 +50,41 @@ public class Player extends Observable implements IPlayer {
         return playerInstance;
     }
 
-    public void move (int x,int y) {
-        tileX = tileX + x ;
-        tileY = tileY + y ;
-    } // ---------------------------------------------------------->
+    /**
+     * This method updates the current position of the player in the maze by the specified amount.
+     * @param x : int
+     * @param y : int
+     */
+    public void move (int x, int y, Maze maze) {
+        this.playerState.move(x, y, maze);
+    }
 
     /**
      * The draw method delegates the action of drawing to the current state of the player.
-     * @param cell
-     * @param x
-     * @param y
+     * @param cell : GraphicsContext
+     * @param x : int
+     * @param y : int
      */
     public void draw (GraphicsContext cell, int x, int y) {
-        playerState.draw(cell, x, y);
+        this.playerState.draw(cell, x, y);
     }
 
-    public int getTileX (){ return tileX; } // --------------------------------------------------------->
+    @Override
+    public void receivePlayer() {
 
-    public int getTileY (){ return tileY; } // --------------------------------------------------------->
+    }
+
+    public int getCurrentRow (){ return currentRow; }
+
+    public void setCurrentRow (int row) {
+        this.currentRow = row;
+    }
+
+    public int getCurrentColumn (){ return currentColumn; }
+
+    public void setCurrentColumn(int column) {
+        this.currentColumn = column;
+    }
 
     public void PlayerPhase (int checkState ,int freezeState, char direction){
 //        if(checkState == 0)
@@ -204,4 +224,5 @@ public class Player extends Observable implements IPlayer {
     public void attack () { // ------------------------------------------------------------------>
         // Attack logic.
     }
+
 }

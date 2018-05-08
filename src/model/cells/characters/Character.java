@@ -1,7 +1,10 @@
 package model.cells.characters;
 
-public interface Character {
+import model.cells.Cell;
+import model.maze.Maze;
+
+public interface Character extends Cell {
     
-    void move(int x, int y);
+    void move(int x, int y, Maze maze);
 
 }

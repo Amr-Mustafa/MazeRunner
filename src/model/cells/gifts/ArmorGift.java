@@ -1,16 +1,14 @@
-package model.cells.walls;
+package model.cells.gifts;
 
 import javafx.scene.canvas.GraphicsContext;
-import model.cells.CellState;
 import model.cells.RoadState;
-import model.cells.walls.states.GrassWallState;
+import model.cells.gifts.states.AmmoGiftState;
+import model.cells.gifts.states.ArmorGiftState;
 
-public class GrassWall extends Wall {
+public class ArmorGift extends Gift {
 
-    private CellState currentState;
-
-    public GrassWall() {
-        this.currentState = new GrassWallState();
+    public ArmorGift() {
+        this.currentState = new ArmorGiftState();
     }
 
     @Override
@@ -21,10 +19,6 @@ public class GrassWall extends Wall {
     @Override
     public void receivePlayer() {
         this.currentState.receivePlayer();
-    }
-
-    public void destroyWall() {
         this.currentState = new RoadState();
     }
-
 }

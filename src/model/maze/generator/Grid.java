@@ -1,7 +1,11 @@
 package model.maze.generator;
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
+import controller.GameScene;
 import model.cells.Cell;
+import model.cells.RoadCell;
 import model.cells.characters.player.Player;
 import model.cells.gifts.GiftFactory;
 import model.cells.walls.Wall;
@@ -190,14 +194,14 @@ public class Grid {
         char[][] matrix = new char[2 * this.rows + 1][2 * this.columns + 1];
 
         /* The northern boundary of the maze is explicitly drawn. */
-        String maze = new String(new char[2 * this.columns + 1]).replace("\0", "b");
+        String maze = new String(new char[2 * this.columns + 1]).replace("\0", "w");
 
         /* For each row. */
         for (int row = 0; row < rows; row++) {
 
             /* The western boundary of the maze is explicitly drawn. */
-            String upperSubCells = "b",
-                    lowerSubCells = "b";
+            String upperSubCells = "w",
+                    lowerSubCells = "w";
 
             /* For each column. */
             for (int column = 0; column < columns; column++) {
@@ -224,17 +228,77 @@ public class Grid {
             }
         }
 
-        /* Randomize gifts and bombs. */
-        int bombs = 4;
-        while (bombs != 0) {
-            bombs--;
+        /* Add the player initial position. */
+        matrix[1][1] = 'p';
+
+        /* Randomize bombs. */
+        int bombs = GameScene.BOMBS;
+        while (bombs > 0) {
+
+            /* Get some random row and column. */
+            int row = ThreadLocalRandom.current().nextInt(2, 2 * this.rows + 1);
+            int column = ThreadLocalRandom.current().nextInt(2, 2 * this.columns + 1);
+
+            /* Make sure that random cell is empty (i.e. a road). */
+            if (matrix[row][column] == 'r') {
+
+                /* Randomly choose whether to put a freeze bomb or a fire bomb. */
+                int bombType = ThreadLocalRandom.current().nextInt(0, 2);
+                matrix[row][column] = bombType == 0 ? 'f' : 'b';
+
+                bombs--;
+            }
         }
 
+        /* Randomize grass walls. */
+        int grassWalls = GameScene.GRASS_WALLS;
+        while (grassWalls > 0) {
 
-        for (int row = 0; row < 2 * this.rows + 1; row++) {
-            for (int column = 0; column < 2 * this.columns + 1; column++) {
-                if (matrix[row][column] != 'b')
-                    matrix[row][column] = 'p';
+            /* Get some random row and column. */
+            int row = ThreadLocalRandom.current().nextInt(1, 2 * this.rows);
+            int column = ThreadLocalRandom.current().nextInt(1, 2 * this.columns);
+
+            /* Make sure that random cell is a wall. */
+            if (matrix[row][column] == 'w') {
+                matrix[row][column] = 'l';
+                grassWalls--;
+            }
+        }
+
+        /* Randomize gifts. */
+        int gifts = GameScene.GIFTS;
+        int giftType = 0;
+        while (gifts > 0) {
+
+            /* Get some random row and column. */
+            int row = ThreadLocalRandom.current().nextInt(1, 2 * this.rows);
+            int column = ThreadLocalRandom.current().nextInt(1, 2 * this.columns);
+
+            /* Make sure that random cell is empty (i.e. a road). */
+            if (matrix[row][column] == 'r') {
+
+                if (giftType == 0) matrix[row][column] = 'a';
+                else if (giftType == 1) matrix[row][column] = 'h';
+                else matrix[row][column] = 't';
+
+                gifts--;
+                giftType++;
+            }
+        }
+
+        /* Randomize weapon location. */
+        int weapon = 1;
+        while (weapon > 0) {
+
+            /* Get some random row and column. */
+            int row = ThreadLocalRandom.current().nextInt(1, 2 * this.rows);
+            int column = ThreadLocalRandom.current().nextInt(1, 2 * this.columns);
+
+            /* Make sure that random cell is empty (i.e. a road). */
+            if (matrix[row][column] == 'r') {
+
+                matrix[row][column] = 'm';
+                weapon--;
             }
         }
 
@@ -249,14 +313,34 @@ public class Grid {
         /* We want to convert the matrix of chars to a matrix of Cells. */
         for (int row = 0; row < 2 * this.rows + 1; row++) {
             for (int column = 0; column < 2 * this.columns + 1; column++) {
-                if (charMatrix[row][column] == 'p') System.out.println("");
-                    //cellMatrix[row][column] = Player.getPlayer();
-                else if (charMatrix[row][column] == 'b') System.out.println("");
-                    //cellMatrix[row][column] = new WallFactory(charMatrix[row][column]).getWall();
-                else if (charMatrix[row][column] == 'r') System.out.println("");
-                    //cellMatrix[row][column] = new RoadTile();
-                else if (charMatrix[row][column] == 'g') System.out.println("");
-                    //cellMatrix[row][column] = new GiftFactory(cellMatrix[row][column]).getGift();
+
+                /* If the character cell represent the player. */
+                if (charMatrix[row][column] == 'p')
+                    cellMatrix[row][column] = Player.getPlayer();
+
+                /* If the character cell represents a bomb. */
+                //else if (charMatrix[row][column] == 'b' || charMatrix[row][column] == 'f')
+                //    cellMatrix[row][column] = new BombFactory().getBomb(charMatrix[row][column]);
+
+                /* If the character cell represents a wall. */
+                else if (charMatrix[row][column] == 'w' || charMatrix[row][column] == 'l')
+                    cellMatrix[row][column] = new WallFactory().getWall(charMatrix[row][column]);
+
+                /* If the character cell represents a gift. */
+                else if (charMatrix[row][column] == 'a' || charMatrix[row][column] == 'h' || charMatrix[row][column] == 't')
+                    cellMatrix[row][column] = new GiftFactory().getGift(charMatrix[row][column]);
+
+                /* If the character cell represents a road. */
+                else if (charMatrix[row][column] == 'r')
+                    cellMatrix[row][column] = new RoadCell();
+
+                /* If the character cell represents a weapon. */
+                else if (charMatrix[row][column] == 'm')
+                    cellMatrix[row][column] = new RoadCell();
+
+                /* Else the character cell represents a gate. */
+                else
+                    cellMatrix[row][column] = new RoadCell();
             }
         }
 

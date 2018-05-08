@@ -1,13 +1,13 @@
-package model.cells.gifts;
+package model.cells;
 
 import javafx.scene.canvas.GraphicsContext;
-import model.cells.RoadState;
-import model.cells.gifts.states.AmmoGiftState;
 
-public class AmmoGift extends Gift {
+public class RoadCell implements Cell {
 
-    public AmmoGift() {
-        this.currentState = new AmmoGiftState();
+    CellState currentState;
+
+    public RoadCell() {
+        this.currentState = new RoadState();
     }
 
     @Override
@@ -18,6 +18,5 @@ public class AmmoGift extends Gift {
     @Override
     public void receivePlayer() {
         this.currentState.receivePlayer();
-        this.currentState = new RoadState();
     }
 }

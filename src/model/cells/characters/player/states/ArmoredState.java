@@ -3,6 +3,7 @@ package model.cells.characters.player.states;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import model.cells.CellState;
+import model.maze.Maze;
 
 public class ArmoredState extends PlayerState implements CellState {
 
@@ -20,12 +21,22 @@ public class ArmoredState extends PlayerState implements CellState {
     }
 
     @Override
+    public void receivePlayer() {
+
+    }
+
+    @Override
     public void draw(GraphicsContext cell, int x, int y) {
         cell.drawImage(sprite, x * 32, y * 32);
     }
 
     @Override
-    void hit() {
+    public void hit() {
+
+    }
+
+    @Override
+    public void move(int x, int y, Maze maze) {
 
     }
 }

@@ -139,22 +139,22 @@ public class SuperCell {
     public void configureSubCells () {
 
         /* The northWesternSubCell is always a passage. */
-        this.northWesternSubCell = new SubCell("g");
+        this.northWesternSubCell = new SubCell("r");
 
         /* The southEasternSubCell is always a passage. */
-        this.southEasternSubCell = new SubCell("b");
+        this.southEasternSubCell = new SubCell("w");
 
         /* If the SuperCell is linked to its southern neighbour, then make the southWesternSubCell a
            passage, otherwise make it a wall. */
         if (this.areLinked(this.south)) {
-            this.southWesternSubCell = new SubCell("g");
-        } else this.southWesternSubCell = new SubCell("b");
+            this.southWesternSubCell = new SubCell("r");
+        } else this.southWesternSubCell = new SubCell("w");
 
         /* If the SuperCell is linked to its eastern neighbour, then make the northEasternSubCell a
            passage, otherwise make it a wall. */
         if (this.areLinked(this.east)) {
-            this.northEasternSubCell = new SubCell("g");
-        } else this.northEasternSubCell = new SubCell("b");
+            this.northEasternSubCell = new SubCell("r");
+        } else this.northEasternSubCell = new SubCell("w");
 
     }
 

@@ -3,6 +3,7 @@ package model.cells.characters.player.states;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import model.cells.CellState;
+import model.maze.Maze;
 
 public class DeadState extends PlayerState implements CellState {
 
@@ -25,7 +26,17 @@ public class DeadState extends PlayerState implements CellState {
     }
 
     @Override
-    void hit() {
+    public void receivePlayer() {
+
+    }
+
+    @Override
+    public void hit() {
+
+    }
+
+    @Override
+    public void move(int x, int y, Maze maze) {
 
     }
 }
