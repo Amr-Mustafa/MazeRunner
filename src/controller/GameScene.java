@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.animation.PathTransition;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
@@ -20,7 +21,6 @@ public class GameScene {
         mazeLoader.setCanvas(CanvasMaze);
         mazeLoader.drawMaze();
         CanvasMaze.setFocusTraversable(true);
-
     }
 
     private void run() {
@@ -37,22 +37,23 @@ public class GameScene {
     int freezed = 0;
     char direction ='R';
     char clickedButton ;
+
     public void keyPress(KeyEvent keyEvent) {
 
         player = Player.getPlayer();
         mazeLoader = MazeLoader.getMazeLoader();
 
-                if(keyEvent.getCode()==KeyCode.W){
-                    if(freezed!=0)
-                    {
-                        freezed--;
-                    }
-                    else if(mazeLoader.mazeMatrix[player.getTileX()][player.getTileY()-1] != 'b') {
-                        mazeLoader.mazeMatrix[player.getTileX()][player.getTileY()] = 'g';
-                        player.move(0, -1);
-                        clickedButton = 'w';
-                    }
-                }
+        player.setScore(100);
+
+        if (keyEvent.getCode()==KeyCode.W) {
+            if (freezed!=0) {
+                freezed--;
+            } else if (mazeLoader.mazeMatrix[player.getTileX()][player.getTileY()-1] != 'b') {
+                mazeLoader.mazeMatrix[player.getTileX()][player.getTileY()] = 'g';
+                player.move(0, -1);
+                clickedButton = 'w';
+            }
+        }
 
                 if(keyEvent.getCode()==KeyCode.S){
                     if(freezed!=0)
@@ -132,4 +133,5 @@ public class GameScene {
         mazeLoader.drawMaze();
 
     }
+
 }

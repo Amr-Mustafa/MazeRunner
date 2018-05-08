@@ -1,7 +1,11 @@
 package model.maze.generator;
 
 import java.util.concurrent.ThreadLocalRandom;
-import model.cells.characters.Cell;
+import model.cells.Cell;
+import model.cells.characters.player.Player;
+import model.cells.gifts.GiftFactory;
+import model.cells.walls.Wall;
+import model.cells.walls.WallFactory;
 
 /**
  * Grid class is essentially a container for Cells.
@@ -212,10 +216,25 @@ public class Grid {
 
         }
 
+        /* Fill in the character matrix from the string. */
         int stringCols = 0;
         for (int row = 0; row < 2 * this.rows + 1; row++) {
             for (int column = 0; column < 2 * this.columns + 1; column++) {
                 matrix[row][column] = maze.toCharArray()[stringCols++];
+            }
+        }
+
+        /* Randomize gifts and bombs. */
+        bombs = 4;
+        while (bombs != 0) {
+
+        }
+
+
+        for (int row = 0; row < 2 * this.rows + 1; row++) {
+            for (int column = 0; column < 2 * this.columns + 1; column++) {
+                if (matrix[row][column] != 'b')
+                    matrix[row][column] = 'p';
             }
         }
 
@@ -230,9 +249,14 @@ public class Grid {
         /* We want to convert the matrix of chars to a matrix of Cells. */
         for (int row = 0; row < 2 * this.rows + 1; row++) {
             for (int column = 0; column < 2 * this.columns + 1; column++) {
-//                if (charMatrix[row][column] == 'a')
-//                    cellMatrix[row][column] = new Wall();
-//                else if (charMatrix[row][column] == '')
+                if (charMatrix[row][column] == 'p') System.out.println("");
+                    //cellMatrix[row][column] = Player.getPlayer();
+                else if (charMatrix[row][column] == 'b') System.out.println("");
+                    //cellMatrix[row][column] = new WallFactory(charMatrix[row][column]).getWall();
+                else if (charMatrix[row][column] == 'r') System.out.println("");
+                    //cellMatrix[row][column] = new RoadTile();
+                else if (charMatrix[row][column] == 'g') System.out.println("");
+                    //cellMatrix[row][column] = new GiftFactory(cellMatrix[row][column]).getGift();
             }
         }
 

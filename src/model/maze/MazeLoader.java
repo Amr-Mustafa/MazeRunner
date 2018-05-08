@@ -21,9 +21,13 @@ public class MazeLoader {
     }
 
     private MazeLoader () {
-        this.binaryTreeMaze = new BinaryTreeMaze();
-        this.maze = binaryTreeMaze.generateMaze(10, 10);
-        this.mazeMatrix = maze.toCharMatrix();
+
+        /* Generate the maze with the given dimensions. */
+        Maze maze = new Maze(21, 21);
+
+        /* Get a 2D character matrix representing the maze. */
+        this.mazeMatrix = maze.getCharMaze();
+
         this.mazeMatrix[1][1] = 'p';
         this.mazeMatrix[3][3] = 'a';
         this.mazeMatrix[15][15] = 'd';
@@ -31,6 +35,7 @@ public class MazeLoader {
         this.mazeMatrix[18][4] = 'f';
         this.mazeMatrix[1][6] = 'c';//arrows
         this.mazeMatrix[1][5] = 'e';//bows
+        this.mazeMatrix[12][4] = 'w';
     }
 
     public void setCanvas(Canvas canvas) {
@@ -69,6 +74,9 @@ public class MazeLoader {
                 }
                 if(mazeMatrix[i][j] == 'e') {
                     cell.drawImage(new Image("view/Bow.PNG"), i * 32, j * 32);
+                }
+                if(mazeMatrix[i][j] == 'w') {
+                    cell.drawImage(new Image("view/foodGift.PNG"), i * 32, j * 32);
                 }
             }
 
