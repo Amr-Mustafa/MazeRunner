@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="1024.0" stylesheets="@../UI.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScoresController">
+    <children>
+        <ImageView fitHeight="698.0" fitWidth="1026.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../UIKit/BG.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="426.0" fitWidth="357.0" layoutX="338.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../UIKit/Scores/Template.png" />
+            </image>
+        </ImageView>
+      <HBox alignment="CENTER" layoutX="444.0" layoutY="444.0" prefHeight="66.0" prefWidth="143.0">
+         <children>
+            <Button fx:id="HomeBTN" mnemonicParsing="false" onAction="#BTNs_Action" prefHeight="66.0" prefWidth="63.0" styleClass="MiniBTN" stylesheets="@../UI.css" />
+            <Button fx:id="PlayBTN" mnemonicParsing="false" onAction="#BTNs_Action" prefHeight="66.0" prefWidth="63.0" styleClass="MiniBTN" stylesheets="@../UI.css" />
+         </children>
+      </HBox>
+      <Label fx:id="TimeLabel" alignment="CENTER" layoutX="518.0" layoutY="324.0" prefHeight="24.0" prefWidth="99.0" text="30:15" />
+      <Label fx:id="ScoreLabel" alignment="CENTER" layoutX="522.0" layoutY="382.0" prefHeight="24.0" prefWidth="99.0" text="1000" />
+    </children>
+</Pane>

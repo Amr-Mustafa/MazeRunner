@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <children>
+      <ImageView fitHeight="698.0" fitWidth="1026.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../UIKit/BG.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="411.0" fitWidth="251.0" layoutX="385.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../UIKit/Main/Main.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="NewGameBTN" layoutX="433.0" layoutY="196.0" mnemonicParsing="false" onAction="#BTNs_Action" prefHeight="55.0" prefWidth="154.0" styleClass="wideBTN" stylesheets="@../UI.css" text="New Game" />
+      <Button fx:id="ResumeBTN" layoutX="433.0" layoutY="269.0" mnemonicParsing="false" onAction="#BTNs_Action" prefHeight="55.0" prefWidth="154.0" styleClass="wideBTN" stylesheets="@../UI.css" text="Resume" />
+      <Button fx:id="ScoresBTN" layoutX="433.0" layoutY="342.0" mnemonicParsing="false" onAction="#BTNs_Action" prefHeight="55.0" prefWidth="154.0" styleClass="wideBTN" stylesheets="@../UI.css" text="Scores" />
+      <Button fx:id="ExitBTN" layoutX="433.0" layoutY="415.0" mnemonicParsing="false" onAction="#BTNs_Action" prefHeight="55.0" prefWidth="154.0" styleClass="wideBTN" stylesheets="@../UI.css" text="Exit" />
+   </children>
+</Pane>

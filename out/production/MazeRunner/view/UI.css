@@ -1,0 +1,43 @@
+.label {
+    -fx-font-family: Cartwheel;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+}
+
+.button.wideBTN {
+    -fx-background-color: transparent;
+    -fx-font-family: Cartwheel;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-background-image: url("../view/UIKit/Button.png");
+}
+
+.button.wideBTN:hover {
+    -fx-background-image: url("../view/UIKit/ButtonHover.png");
+}
+
+/*----------------------------------------------------------------*/
+
+.button.MiniBTN {
+    -fx-background-color: transparent;
+    -fx-font-family: Cartwheel;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-background-image: url("../view/UIKit/ButtonMini.png");
+}
+
+.button.MiniBTN:hover {
+    -fx-background-image: url("../view/UIKit/ButtonHoverMini.png");
+}
+
+/*----------------------------------------------------------------*/
+
+.button.CircleBTN {
+    -fx-background-color: transparent;
+    -fx-font-size: 20;
+    -fx-background-image: url("../view/UIKit/CircleBTN.png");
+}
+
+.button.CircleBTN:hover {
+    -fx-background-image: url("../view/UIKit/CircleBTNHover.png");
+}

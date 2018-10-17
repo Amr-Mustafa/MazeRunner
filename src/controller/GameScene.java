@@ -1,15 +1,32 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.maze.Maze;
 import model.maze.MazeLoader;
 import model.cells.characters.player.Player;
 
-public class GameScene {
+import java.net.URL;
+import java.util.ResourceBundle;
 
+public class GameScene implements Initializable
+{
+
+    public Label HealthLBL;
+    public Label ScoreLBL;
+    public Label TimeLBL;
+    public Label AmmoLBL;
+
+    public Button SaveBTN;
+    public Button PauseBTN;
     @FXML
     private Canvas CanvasMaze;
 
@@ -23,24 +40,10 @@ public class GameScene {
     private Player player;
     private Maze maze;
 
-    public void initialize(){
+    private boolean pause = false;
 
-        /* Generate a new maze with the given dimensions. */
-        maze = new Maze(ROWS, COLUMNS);
-
-        /* Draw the initial state of the maze. */
-        maze.drawMaze(CanvasMaze);
-
-        /* Get a reference to the player singleton. */
-        player = Player.getPlayer();
-
-        /* Set focus on the canvas. */
-        CanvasMaze.setFocusTraversable(true);
-
-        //mazeLoader = MazeLoader.getMazeLoader();
-        //mazeLoader.setCanvas(CanvasMaze);
-        //mazeLoader.drawMaze();
-    }
+    Image PlayImage = new Image(getClass().getResourceAsStream("../view/UIKit/PlayIcon.png"));
+    Image PauseImage = new Image(getClass().getResourceAsStream("../view/UIKit/PauseIcon.png"));
 
     int checkState = 0 ;
     int freezeState = 0;
@@ -69,46 +72,43 @@ public class GameScene {
         if(keyEvent.getCode()==KeyCode.D){
             player.move(1, 0, maze);
         }
-
-
-//        mazeLoader.drawMaze();
-//        if(mazeLoader.mazeMatrix[player.getCurrentRow()][player.getCurrentColumn()] == 'a')
-//        {
-//            checkState = 1;
-//            //mazeLoader.mazeMatrix[player.getCurrentRow()][player.getCurrentColumn()] = 'g';
-//        }
-//        if(mazeLoader.mazeMatrix[player.getCurrentRow()][player.getCurrentColumn()] == 'd')
-//        {
-//            if(checkState == 1)
-//                checkState =0;
-//            else if(checkState ==0)
-//                checkState =2;
-//            mazeLoader.mazeMatrix[player.getCurrentRow()+1][player.getCurrentColumn()+1] = 'g';
-//            mazeLoader.mazeMatrix[player.getCurrentRow()+1][player.getCurrentColumn()] = 'g';
-//            mazeLoader.mazeMatrix[player.getCurrentRow()][player.getCurrentColumn()+1] = 'g';
-//            mazeLoader.mazeMatrix[player.getCurrentRow()-1][player.getCurrentColumn()-1] = 'g';
-//            mazeLoader.mazeMatrix[player.getCurrentRow()-1][player.getCurrentColumn()] = 'g';
-//            mazeLoader.mazeMatrix[player.getCurrentRow()][player.getCurrentColumn()-1] = 'g';
-//            mazeLoader.mazeMatrix[player.getCurrentRow()+1][player.getCurrentColumn()-1] = 'g';
-//            mazeLoader.mazeMatrix[player.getCurrentRow()-1][player.getCurrentColumn()+1] = 'g';
-//            maze.drawMaze(CanvasMaze);
-//            mazeLoader.mazeMatrix[player.getCurrentRow()][player.getCurrentColumn()] = 'g';
-//        }
-//        if(mazeLoader.mazeMatrix[player.getCurrentRow()][player.getCurrentColumn()] == 'f')
-//        {
-//            freezeState = 1;
-//            freezed = 5 ;
-//        }
-//        if(freezed ==0)
-//        {
-//            freezeState = 0;
-//        }
-//
-//        player.PlayerPhase(checkState,freezeState,direction);
-//        mazeLoader.moveInMaze(player.getCurrentRow(),player.getCurrentColumn());
-//        mazeLoader.mazeMatrix[player.getCurrentRow()][player.getCurrentColumn()] = 'p';
-//        maze.drawMaze(CanvasMaze);
-
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
+    {
+        /* Generate a new maze with the given dimensions. */
+        maze = new Maze(ROWS, COLUMNS);
+
+        /* Draw the initial state of the maze. */
+        maze.drawMaze(CanvasMaze);
+
+        /* Get a reference to the player singleton. */
+        player = Player.getPlayer();
+
+        /* Set focus on the canvas. */
+        CanvasMaze.setFocusTraversable(true);
+
+
+
+        PauseBTN.setGraphic(new ImageView(PauseImage));
+    }
+
+    public void BTNs_Action(ActionEvent actionEvent)
+    {
+        if (actionEvent.getSource() == SaveBTN) {
+            //Save Data
+        }
+
+        if (actionEvent.getSource() == PauseBTN) {
+            if (pause) {
+                PauseBTN.setGraphic(new ImageView(PauseImage));
+                pause = false;
+            }
+            else {
+                PauseBTN.setGraphic(new ImageView(PlayImage));
+                pause = true;
+            }
+        }
+    }
 }
